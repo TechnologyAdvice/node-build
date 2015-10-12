@@ -1,23 +1,17 @@
-FROM docker:1.8
+FROM mhart/alpine-node:0.12
 
-ENV VERSION=v0.12.7 CMD=node DOMAIN=nodejs.org
+RUN apk add --update curl \
+	&& rm -rf /var/cache/apk/*
 
-RUN apk update
+ENV DOCKER_BUCKET get.docker.com
+ENV DOCKER_VERSION 1.8.2
+ENV DOCKER_SHA256 97a3f5924b0b831a310efa8bf0a4c91956cd6387c4a8667d27e2b2dd3da67e4d
 
-RUN apk-install curl make gcc g++ python linux-headers paxctl libgcc libstdc++ && \
-  curl -sSL https://${DOMAIN}/dist/${VERSION}/${CMD}-${VERSION}.tar.gz | tar -xz && \
-  cd /${CMD}-${VERSION} && \
-  ./configure --prefix=/usr ${CONFIG_FLAGS} && \
-  make -j$(grep -c ^processor /proc/cpuinfo 2>/dev/null || 1) && \
-  make install && \
-  paxctl -cm /usr/bin/${CMD} && \
-  cd / && \
-  if [ -x /usr/bin/npm -a -z "$NO_NPM_UPDATE" ]; then \
-    npm install -g npm && \
-    find /usr/lib/node_modules/npm -name test -o -name .bin -type d | xargs rm -rf; \
-  fi && \
-  apk del curl make gcc g++ python linux-headers paxctl ${DEL_PKGS} && \
-  rm -rf /etc/ssl /${CMD}-${VERSION} ${RM_DIRS} \
-    /usr/share/man /tmp/* /root/.npm /root/.node-gyp \
-    /usr/lib/node_modules/npm/man /usr/lib/node_modules/npm/doc /usr/lib/node_modules/npm/html
+RUN curl -fSL "https://${DOCKER_BUCKET}/builds/Linux/x86_64/docker-$DOCKER_VERSION" -o /usr/local/bin/docker \
+	&& echo "${DOCKER_SHA256}  /usr/local/bin/docker" | sha256sum -c - \
+	&& chmod +x /usr/local/bin/docker
 
+COPY docker-entrypoint.sh /usr/local/bin/
+
+ENTRYPOINT ["docker-entrypoint.sh"]
+CMD ["sh"]
