@@ -1,7 +1,15 @@
 FROM mhart/alpine-node:0.12
 
-RUN apk add --update curl \
-	&& rm -rf /var/cache/apk/*
+RUN apk add --update curl
+
+# npm install deps
+RUN apk add git openssh-client
+
+# native build deps
+RUN apk add make gcc
+
+# scripting tools
+RUN apk add bash
 
 ENV DOCKER_BUCKET get.docker.com
 ENV DOCKER_VERSION 1.8.2
@@ -14,4 +22,4 @@ RUN curl -fSL "https://${DOCKER_BUCKET}/builds/Linux/x86_64/docker-$DOCKER_VERSI
 COPY docker-entrypoint.sh /usr/local/bin/
 
 ENTRYPOINT ["docker-entrypoint.sh"]
-CMD ["sh"]
+CMD ["/bin/bash"]
