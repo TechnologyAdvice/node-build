@@ -11,7 +11,7 @@ RUN apk add make gcc
 # scripting tools
 RUN apk add bash
 
-# update NPM
-RUN npm install -g npm@3.0-latest
+# update NPM (Not stable yet)
+# RUN npm install -g npm@3.0-latest
 
 CMD ["/bin/bash"]
