@@ -1,4 +1,4 @@
-FROM mhart/alpine-node:4.2.0
+FROM mhart/alpine-node:4.2.3
 
 RUN apk update
 
