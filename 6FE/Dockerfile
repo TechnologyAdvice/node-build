@@ -10,7 +10,8 @@ RUN PATH=$PATH:$PYTHON
 # Ruby and jekyll stuff
 RUN apk add libatomic readline readline-dev libxml2 libxml2-dev alpine-sdk \
     libxslt libxslt-dev zlib-dev zlib yaml yaml-dev libffi-dev build-base \
-    ruby-irb ruby-json ruby-rake ruby-bundler ruby-rdoc ruby-dev ruby-io-console jekyll
+    ruby-irb ruby-json ruby-rake ruby-bundler ruby-rdoc ruby-dev ruby-io-console
+RUN gem install jekyll
 
 # scripting tools
 RUN apk add bash
