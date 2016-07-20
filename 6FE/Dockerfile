@@ -11,7 +11,6 @@ RUN PATH=$PATH:$PYTHON
 RUN apk add libatomic readline readline-dev libxml2 libxml2-dev \
     libxslt libxslt-dev zlib-dev zlib yaml yaml-dev libffi-dev build-base \
     ruby-irb ruby-json ruby-rake ruby-bundler ruby-rdoc ruby-dev ruby-io-console alpine-sdk
-RUN bundle
 
 # scripting tools
 RUN apk add bash
