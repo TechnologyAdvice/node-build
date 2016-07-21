@@ -1,19 +1,15 @@
-FROM mhart/alpine-node:6
+FROM node:6
 
-RUN apk upgrade --update
-
-# Python
-RUN apk add python
-RUN PYTHON=/usr/bin/python
-RUN PATH=$PATH:$PYTHON
-
-# Ruby and jekyll stuff
-RUN apk add libatomic readline readline-dev libxml2 libxml2-dev alpine-sdk \
-    libxslt libxslt-dev zlib-dev zlib yaml yaml-dev libffi-dev build-base \
-    ruby-irb ruby-json ruby-rake ruby-bundler ruby-rdoc ruby-dev ruby-io-console
+# Core packages
+RUN apt-get update
+RUN apt-get install -y build-essential python ruby-dev ruby chrpath libssl-dev libxft-dev \
+    libfreetype6 libfreetype6-dev libfontconfig1 libfontconfig1-dev git
 RUN gem install jekyll
 
-# scripting tools
-RUN apk add bash
+# PhantomJS
+RUN wget https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2
+RUN tar xvjf phantomjs-2.1.1-linux-x86_64.tar.bz2 && \
+    mv phantomjs-2.1.1-linux-x86_64 /usr/local/share && \
+    ln -sf /usr/local/share/phantomjs-2.1.1-linux-x86_64/bin/phantomjs /usr/local/bin
 
 CMD ["/bin/bash"]
