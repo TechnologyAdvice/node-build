@@ -11,4 +11,7 @@ RUN apk add make gcc
 # scripting tools
 RUN apk add bash
 
+# YARN!
+npm i yarn -g
+
 CMD ["/bin/bash"]
