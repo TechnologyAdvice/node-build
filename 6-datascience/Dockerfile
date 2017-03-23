@@ -1,7 +1,7 @@
 FROM node:6
 
 # -------------------------------------
-# https://github.com/ContinuumIO/docker-images/blob/master/anaconda3/Dockerfile
+# https://github.com/ContinuumIO/docker-images/blob/master/anaconda/Dockerfile
 # -------------------------------------
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 
@@ -10,7 +10,7 @@ RUN apt-get update --fix-missing && apt-get install -y wget bzip2 ca-certificate
     git mercurial subversion
 
 RUN echo 'export PATH=/opt/conda/bin:$PATH' > /etc/profile.d/conda.sh && \
-    wget --quiet https://repo.continuum.io/archive/Anaconda3-4.3.1-Linux-x86_64.sh -O ~/anaconda.sh && \
+    wget --quiet https://repo.continuum.io/archive/Anaconda2-4.3.1-Linux-x86_64.sh -O ~/anaconda.sh && \
     /bin/bash ~/anaconda.sh -b -p /opt/conda && \
     rm ~/anaconda.sh
 
