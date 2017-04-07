@@ -1,4 +1,4 @@
-FROM docker:17.03
+FROM docker:17.04.0-ce-git
 # FROM alpine:3.5
 
 # ENV VERSION=v4.8.2 NPM_VERSION=2
