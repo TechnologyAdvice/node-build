@@ -1,13 +1,9 @@
 FROM docker:17.04.0-ce-git
 
-# ENV VERSION=v4.8.1 NPM_VERSION=2
 ENV VERSION=v6.10.2 NPM_VERSION=3
-# ENV VERSION=v7.8.0 NPM_VERSION=4
 
-# For base builds
-# ENV CONFIG_FLAGS="--fully-static --without-npm" DEL_PKGS="libstdc++" RM_DIRS=/usr/include
-
-RUN apk add --no-cache curl make gcc g++ python linux-headers binutils-gold gnupg libstdc++ && \
+RUN mkdir -m 777 /tmp &&  \
+  apk add --no-cache curl make gcc g++ python linux-headers binutils-gold gnupg libstdc++ && \
   gpg --keyserver ha.pool.sks-keyservers.net --recv-keys \
     94AE36675C464D64BAFA68DD7434390BDBE9B9C5 \
     FD3A5288F042B6850C66B31F09FE44734EB7990E \
