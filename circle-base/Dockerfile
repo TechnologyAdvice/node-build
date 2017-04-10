@@ -2,8 +2,7 @@ FROM docker:17.04.0-ce-git
 
 ENV VERSION=v6.10.2 NPM_VERSION=3
 
-RUN mkdir -m 777 /tmp &&  \
-  apk add --no-cache curl make gcc g++ python linux-headers binutils-gold gnupg libstdc++ && \
+RUN apk add --no-cache curl make gcc g++ python linux-headers binutils-gold gnupg libstdc++ && \
   gpg --keyserver ha.pool.sks-keyservers.net --recv-keys \
     94AE36675C464D64BAFA68DD7434390BDBE9B9C5 \
     FD3A5288F042B6850C66B31F09FE44734EB7990E \
@@ -26,4 +25,4 @@ RUN mkdir -m 777 /tmp &&  \
     find /usr/lib/node_modules/npm -name test -o -name .bin -type d | xargs rm -rf; \
   fi && \
   apk del curl make gcc g++ python linux-headers binutils-gold gnupg ${DEL_PKGS} && \
-  rm -rf ${RM_DIRS} /node-${VERSION}* /usr/share/man /tmp
+  rm -rf ${RM_DIRS} /node-${VERSION}* /usr/share/man /tmp/*
