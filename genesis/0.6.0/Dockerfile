@@ -2,6 +2,7 @@ FROM node:6
 
 RUN apt-get update
 ENV NODE_PATH /usr/local/lib/node_modules/
+ENV PHANTOMJS_CDNURL http://cnpmjs.org/downloads
 
 # PhantomJS
 RUN wget https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2
