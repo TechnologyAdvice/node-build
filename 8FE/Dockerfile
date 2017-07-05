@@ -2,6 +2,9 @@ FROM node:8
 
 RUN apt-get update
 
+# Yarn
+RUN curl -o- -L https://yarnpkg.com/install.sh | bash
+
 # PhantomJS
 RUN wget https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2
 RUN PHANTOMJS_CDNURL=http://cnpmjs.org/downloads tar xvjf phantomjs-2.1.1-linux-x86_64.tar.bz2 && \
