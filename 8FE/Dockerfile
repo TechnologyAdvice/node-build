@@ -11,7 +11,7 @@ RUN PHANTOMJS_CDNURL=http://cnpmjs.org/downloads tar xvjf phantomjs-2.1.1-linux-
     mv phantomjs-2.1.1-linux-x86_64 /usr/local/share && \
     ln -sf /usr/local/share/phantomjs-2.1.1-linux-x86_64/bin/phantomjs /usr/local/bin
 
-# AWS (requires pip)
+# AWS CLI (requires pip)
 RUN apt-get install -y python
 RUN apt-get install -y python-pip libpython-dev python-dev
 RUN pip install awscli
